@@ -105,7 +105,13 @@ input {
         color: black;
 }
 
-
+.logginbox
+{
+      width: 300px;
+  border: 25px solid white;
+  padding: 25px;
+  margin: 25px;
+}
 
 /* W3.CSS 4.12 November 2018 by Jan Egil and Borge Refsnes */
 html {

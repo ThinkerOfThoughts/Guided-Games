@@ -3,28 +3,54 @@
     <head>
         <meta charset="utf-8">
         <title>Guided Games</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
        <link rel="stylesheet" href="css/style.css" />
+	   <!--From template-->
+	   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+	   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	   <!--Fnd template-->
 	</head>
-    
-    <body style="display: inline; height: auto">
 
+	<!--From a template --> 
+	<style>
+	html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+	.w3-sidebar {
+	  z-index: 3;
+	  width: 250px;
+	  top: 43px;
+	  bottom: 0;
+	  height: inherit;
+	}
+	</style>
+	<!--End template-->
+	
+    <body>
+    
+<!--From a template -->  
         <!-- Navbar -->
         <div class = "topbar" align="center">
             <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
             <a class="top_button_rightleaf top_button:hover" href="home.html">Home</a>
-            <a class="top_button_rightleaf top_button:hover" href="forum.html">Forum</a>
             <img class="logo" src="css/image_resources/guided_games.png"/>
-            <a class="top_button_leftleaf top_button:hover" href="login.html">Login</a>
-            <a class="top_button_leftleaf top_button:hover" href="register.html">Register</a>
+            <a class="top_button_rightleaf top_button:hover" href="forum.html">Forum</a>
             <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
         </div>
-        <br>
-        <div align="center">
-             <a class="top_button_middle top_button:hover" href="faq.html">FAQ</a>
-             <br><br><br><br>   <!-- making space between top and bottom -->
+
+ <div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Guided Games</h1>
+            <input id="username" type="text" placeholder="Username" />
+            <input id="message" type="text" placeholder="Message" />
+            <button id="send">Post</button>
+			<div id="output"></div>
         </div>
-        <!-- Navbar -->
-        TODO 3
+    </div>
+  </div>
+ 
+</div>
+
     </body>
     <script src="/chat.js"></script>
 </html>
