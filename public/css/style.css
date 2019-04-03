@@ -2,6 +2,7 @@ body {
     background: url("image_resources/background1_clear.jpg"), no-repeat, fixed;
     background-color: #cccccc;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 body {
