@@ -4,36 +4,36 @@ body {
     background-size: cover;
 }
 
-body{
+body {
     font-family: 'Nunito';
 }
 
 
 
-#output p{
+#output p {
     padding: 14px 0px;
     margin: 0 20px;
     border: 1px solid #e9e9e9;
     color: #F6F6F6;
 }
 
-#feedback p{
+#feedback p {
     color: #aaa;
     padding: 14px 0px;
     margin: 0 20px;
 }
 
-#output strong{
+#output strong {
     color: #575ed8;
 }
 
-label{
+label {
     box-sizing: border-box;
     display: block;
     padding: 10px 20px;
 }
 
-input{
+input {
     padding: 10px 20px;
     box-sizing: border-box;
     background: #eee;
@@ -54,34 +54,41 @@ input{
     border-top-width: 0;
 }
 
-button{
+.top_button_leftleaf {
     border-style: none;
     border-color: inherit;
     border-width: 0;
-    background: #575ed8;
-    color: #fff;
-    font-size: 18px;
-    padding: 12px 0;
-    width: 6%;
-    border-radius: 0 0 2px 2px;
-}
-
-.loggin_button {
-    background: #575ed8;
+    background: #f4f4f4;
     color: #000;
     font-size: 18px;
-    border: 0;
-    padding: 12px 0;
-    width: 100%;
-    border-radius: 0 0 2px 2px;
-    float: right;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+    padding: 12px 12px;
+    border-radius: 9px 90px 9px 90px;
 }
-    .loggin_button:hover {
-        background-color: #ffff; /* Green */
-        color: white;
-    }
+
+.top_button_rightleaf {
+    border-style: none;
+    border-color: inherit;
+    border-width: 0;
+    background: #f4f4f4;
+    color: #000;
+    font-size: 18px;
+    padding: 12px 12px;
+    border-radius: 90px 9px 90px 9px;
+}
+.top_button_middle {
+    border-style: none;
+    border-color: inherit;
+    border-width: 0;
+    background: #f4f4f4;
+    color: #000;
+    font-size: 18px;
+    padding: 12px 12px;
+    border-radius: 100px 100px 100px 100px;
+}
+.top_button:hover {
+        background-color: #fff;
+        color: black;
+}
 
 
 
