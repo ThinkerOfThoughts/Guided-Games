@@ -8,7 +8,21 @@ body {
     font-family: 'Nunito';
 }
 
+.logo
+{
+    max-width: 25%;
+    max-height: 25%;   
+    display: inline-block;
 
+}
+
+.logo_scrollwork
+{
+    max-width: 20%;
+    max-height: 20%;
+    margin: auto;
+    display: inline-block;
+}
 
 #output p {
     padding: 14px 0px;
