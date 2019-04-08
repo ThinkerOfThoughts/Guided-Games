@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>Guided Games</title>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+       <link rel="stylesheet" href="css/style.css" />
+	   <!--From template-->
+	   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+	   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	   <!--Fnd template-->
+	</head>
+
+	<!--From a template --> 
+	<style>
+	html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+	.w3-sidebar {
+	  z-index: 3;
+	  width: 250px;
+	  top: 43px;
+	  bottom: 0;
+	  height: inherit;
+	}
+	body{ background-image: url("./css/image_resources/Legendary_Engram_background.gif");
+	}
+	</style>
+	<!--End template-->
+	
+    <body>
+    
+<!--From a template -->  
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    <div id="button"><a href="index.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Home</a></div>
+    <div id="button"><a href="forum.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Forum</a></div>
+	<div id="button"><a href="firebase_test.html" class="w3-bar-item w3-button w3-theme-l1">Sign Up</a></div>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">FAQ</a>
+  </div>
+  </div>
+<!--End template -->   
+
+ <div class="w3-row w3-padding-64">
+    <div class="w3-twothird w3-container">
+	<form id="sign-up">
+      <h1 class="w3-text-teal">Guided Games</h1>
+            <input id="username" type="text" placeholder="Email" />
+            <input id="password" type="text" placeholder="Password" />
+            <input type="submit" name="submit-btn" value="Create user" class="button"/>
+        </div>
+		</form>
+    </div>
+    <script src="./signup.js"></script>
+ 
+
+    </body>
+</html>
