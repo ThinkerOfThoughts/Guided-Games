@@ -8,7 +8,6 @@ var config = {
     messagingSenderId: "887475943898"
 };
 firebase.initializeApp(config);
-var worked = 0;
   
 //function to create user modelled after class example
 function sign_up(event)
@@ -27,22 +26,33 @@ function sign_up(event)
 	}
 	else
 	{
-	firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
-		var errorCode = error.code;
-		var errorMessage = error.message;
-		alert(errorCode);
-		alert(errorMessage);
-		worked = -1;
-	});
-	
-	console.log(worked);
-	if(worked == -1)
-	{
-		alert("Account not created!");
-	}
-	
+		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			alert(errorCode);
+			alert(errorMessage);
+		});
 	}
 	
 }
 
 document.querySelector('#register').addEventListener('submit', sign_up);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
