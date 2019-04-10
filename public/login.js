@@ -12,21 +12,31 @@ firebase.initializeApp(config);
 firebase.auth().onAuthStateChanged(function(user) {
 	if(user)
 	{
-		var section = document.getElementById("login");
-		var owner = document.getElementById("core");
-		owner.removeChild(section);
-		owner.innerHTML = owner.innerHTML + '<form id=\"user_info\"><div class=\"w3-row w3-padding-32\" align=\"center\">'
-			+ '<input type=\"submit\" name=\"submit-btn\" value=\"Logout\" class=\"button\">'
-			+ '</div></form>';
-		function logout(event)
+		
+		var dataref = firebase.database().ref("users/");
+		dataref.orderByChild('email').equalTo(user.email).on("child_added", function(snapshot)
 		{
-			firebase.auth().signOut().then(function() {
-			  // Sign-out successful.
-			}).catch(function(error) {
-			  // An error happened.
-			});
-		}
-		document.querySelector('#user_info').addEventListener('submit', logout);
+			var section = document.getElementById("login");
+			var owner = document.getElementById("core");
+			owner.removeChild(section);
+			var temp_name = snapshot.child("username").val();
+			var temp_mail = user.email;
+			
+			owner.innerHTML = owner.innerHTML + '<form id=\"user_info\"><div class=\"w3-row w3-padding-32\" align=\"center\">'
+				+ '<div>' + temp_name + '</div><div>' + temp_mail + '</div>'
+				+ '<div> Insert information about user\'s game character here </div>'
+				+ '<input type=\"submit\" name=\"submit-btn\" value=\"Logout\" class=\"button\">'
+				+ '</div></form>';
+			function logout(event)
+			{
+				firebase.auth().signOut().then(function() {
+				  // Sign-out successful.
+				}).catch(function(error) {
+				  // An error happened.
+				});
+			}
+			document.querySelector('#user_info').addEventListener('submit', logout);
+		});
 	}
 	else
 	{
