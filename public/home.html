@@ -1,31 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
+	<head>
         <meta charset="utf-8">
         <title>Guided Games</title>
-		 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+	   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
        <link rel="stylesheet" href="css/style.css" />
 	</head>
     
-    <body style="display: inline; height: auto">
+    <body id="core" style="display: inline; height: auto">
 
         <!-- Navbar -->
-        <div class = "topbar" align="center">
+        <div id="header" class = "topbar" align="center">
             <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
             <a class="top_button_rightleaf top_button:hover" href="home.html">Home</a>
             <img class="logo" src="css/image_resources/guided_games.png"/>
             <a class="top_button_rightleaf top_button:hover" href="forum.html">Forum</a>
             <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
         </div>
-        <br>
-
-        <!-- Navbar -->
-         <div class="loggin_box" align="left">
-             
-            <input id="username" type="text" placeholder="Username" />
-            <input id="message" type="password" placeholder="Password" />
-            <button id="send">Login</button>
-          </div>
-    </body>
-	<script src="./chat.js"></script>
+		
+		<form id="login">
+		<div class="w3-row w3-padding-32">
+         <div style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="center">
+                <label for="username">Email</label>
+                <input id="Email" type="text" placeholder="Email" style="width: 300px;" />
+                <br>
+                <label for="username">Password</label>
+                <input id="password" type="password" placeholder="Password" style="width: 300px;"/>
+                <br>
+                <input type="submit" name="submit-btn" value="Login" class="button"/>
+				
+			<div class="row">
+				<a href="./Register.html">Register</a>
+			</div>
+         </div>
+		 </form>
+		</div>
+	</body>
+    <script src="./login.js"></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

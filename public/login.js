@@ -9,25 +9,49 @@ var config = {
   };
 firebase.initializeApp(config);
 
-function sign_in(event)
-{
-	event.preventDefault();
-	
-	
-	const form = event.target;
-	const email = form.Email.value;
-	const password = form.password.value;
-	
-	firebase.auth().signInWithEmailAndPassword(email, password).then(function(response){
-		alert('Logged in!');
-		window.location.href = './home.html';
-	}).catch(function(error){
-		var errorCode = error.code;
-		var errorMessage = error.message;
-		alert(errorCode);
-		alert(errorMessage);
-	});
-	
-}
+firebase.auth().onAuthStateChanged(function(user) {
+	if(user)
+	{
+		var section = document.getElementById("login");
+		var owner = document.getElementById("core");
+		owner.removeChild(section);
+		owner.innerHTML = owner.innerHTML + '<form id=\"user_info\"><div class=\"w3-row w3-padding-32\" align=\"center\">'
+			+ '<input type=\"submit\" name=\"submit-btn\" value=\"Logout\" class=\"button\">'
+			+ '</div></form>';
+		function logout(event)
+		{
+			firebase.auth().signOut().then(function() {
+			  // Sign-out successful.
+			}).catch(function(error) {
+			  // An error happened.
+			});
+		}
+		document.querySelector('#user_info').addEventListener('submit', logout);
+	}
+	else
+	{
+		function sign_in(event)
+		{
+			event.preventDefault();
+			
+			
+			const form = event.target;
+			const email = form.Email.value;
+			const password = form.password.value;
+			
+			firebase.auth().signInWithEmailAndPassword(email, password).then(function(response){
+				alert('Logged in!');
+				window.location.href = './home.html';
+			}).catch(function(error){
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				alert(errorCode);
+				alert(errorMessage);
+			});
+			
+		}
 
-document.querySelector('#login').addEventListener('submit', sign_in);
+		document.querySelector('#login').addEventListener('submit', sign_in);
+	}
+});
+
