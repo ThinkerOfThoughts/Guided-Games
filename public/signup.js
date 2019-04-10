@@ -24,6 +24,18 @@ function sign_up(event)
 	{
 		alert("Passwords do not match!");
 	}
+	else if(username == "")
+	{
+		alert("Username is blank!");
+	}
+	else if(password == "")
+	{
+		alert("Password is blank!");
+	}
+	else if(email == "")
+	{
+		alert("Email is blank!");
+	}
 	else
 	{
 		firebase.auth().createUserWithEmailAndPassword(email, password).then(function(response){
