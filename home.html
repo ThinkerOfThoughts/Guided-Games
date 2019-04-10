@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Guided Games</title>
+       <link rel="stylesheet" href="css/style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+	<script src="./search.js"></script>
+	</head>
+    
+    <body style="display: inline; height: auto">
+
+        <!-- Navbar -->
+        <div class = "topbar" align="center">
+            <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
+            <a class="top_button_rightleaf top_button:hover" href="home.html">Home</a>
+            <img class="logo" src="css/image_resources/guided_games.png"/>
+            <a class="top_button_rightleaf top_button:hover" href="forum.html">Forum</a>
+            <a class="top_button_rightleaf top_button:hover" href="register.html">Register</a>
+            <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
+		<!--added to test search function, if this breaks stuff this is where the problem is-->
+ 		<input type="text" id="searchbox" placeholder="Search..">
+		<button id="searchbutton" onclick="basic_search()">search</button>
+		<!-- end searchbox -->
+        </div>
+        <br>
+
+        <!-- Navbar -->
+         <div class="loggin_box" align="left">
+             
+            <input id="username" type="text" placeholder="Username" />
+            <input id="password" type="password" placeholder="Password" />
+            <button id="send">Login</button>
+          </div>
+    </body>
+    <script src="./chat.js"></script>
+</html>
