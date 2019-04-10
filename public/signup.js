@@ -6,7 +6,7 @@ var config = {
     projectId: "guided-games",
     storageBucket: "guided-games.appspot.com",
     messagingSenderId: "887475943898"
-};
+  };
 firebase.initializeApp(config);
   
 //function to create user modelled after class example
@@ -26,12 +26,36 @@ function sign_up(event)
 	}
 	else
 	{
-		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
+		firebase.auth().createUserWithEmailAndPassword(email, password).then(function(response){
+			let users = firebase.database().ref('users');
+			const newKey = users.push().key;
+			
+			let newData = {
+				username: username,
+				email: email
+			};
+			
+			firebase.database().ref('users/' + newKey).update(newData, function(error){
+				if(error){
+					alert(error);
+				}
+				else
+				{
+					alert('User has been created!');
+					window.location.href = './home.html';
+				}
+			});
+			
+			
+			
+		}).catch(function(error){
 			var errorCode = error.code;
 			var errorMessage = error.message;
 			alert(errorCode);
 			alert(errorMessage);
 		});
+		//const url = new URL('http://localhost:3000/register');
+		//let params = {username: username, email: email};
 	}
 	
 }
