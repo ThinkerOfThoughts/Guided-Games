@@ -1,43 +1,58 @@
-<!-- this is old and does nothing -->
-
 <!DOCTYPE html>
 <html>
-    <head>
+	<head>
         <meta charset="utf-8">
-        <title>Project Testing</title>
+        <title>Guided Games</title>
+		<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-       <link rel="stylesheet" href="css/style.css" />
-	   <!--From template-->
 	   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-	   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	   <!--Fnd template-->
+       <link rel="stylesheet" href="css/style.css" />
 	</head>
-	
-	<!--From a template --> 
-	<style>
-	html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
-	.w3-sidebar {
-	  z-index: 3;
-	  width: 250px;
-	  top: 43px;
-	  bottom: 0;
-	  height: inherit;
-	}
-	</style>
-	<!--End template-->
-	
-    <body>
     
-<!--From a template -->  
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-theme-l1">Home</a>
-    <div id="button"><a href="forum.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Forum</a></div>
-	<div id="button"><a href="firebase_test.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Sign Up</a></div>
-	<div><a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">FAQ</a></div>
-    &nbsp;</div>
-<!--End template -->   
+    <body id="core" style="display: inline; height: auto">
+
+        <!-- Navbar -->
+        <div id="header" class = "topbar" align="center">
+            <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
+            <a class="top_button_rightleaf top_button:hover" href="index.html">Home</a>
+            <img class="logo" src="css/image_resources/guided_games.png"/>
+            <a class="top_button_rightleaf top_button:hover" href="forum.html">Forum</a>
+            <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
+        </div>
+		
+		<form id="login">
+		<div class="w3-row w3-padding-32">
+         <div style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="center">
+                <label for="username">Email</label>
+                <input id="Email" type="text" placeholder="Email" style="width: 300px;" />
+                <br>
+                <label for="username">Password</label>
+                <input id="password" type="password" placeholder="Password" style="width: 300px;"/>
+                <br>
+                <input type="submit" name="submit-btn" value="Login" class="button"/>
+				
+			<div class="row">
+				<a href="./Register.html">Register</a>
+			</div>
+         </div>
+		 </form>
+		</div>
+	</body>
+    <script src="./login.js"></script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
