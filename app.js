@@ -24,24 +24,21 @@ io.on('connection', function(socket){
 	socket.on('chat', function(data){
 		io.emit('chat', data);
 		
+		/*
+		//Header used to pass the key with each GET request
+		var config = {
+			headers: {'X-Api-Key': 'd252a2c04c9b4dc6960daffda4a3e435'}
+		};
+
+		// Performing a GET request
+		axios.get('https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/' + data.username, config)
+			.then(function(response){
+			console.log(response.data); // ex.: { user: 'Your User'}
+			console.log("User's account name is ", response.data.Response[0].displayName);
+		});  
+		*/
 	});
 });
-
-/*
-//Header used to pass the key with each GET request
-var config = {
-  headers: {'X-Api-Key': 'd252a2c04c9b4dc6960daffda4a3e435'}
-};
-
-//var url = 'https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/'
-
-// Performing a GET request
-axios.get('https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/' + 'dattowatto', config)
-  .then(function(response){
-    console.log(response.data); // ex.: { user: 'Your User'}
-    console.log("Datto's name is ", response.data.Response[0].displayName);
-});  
-*/
 
 
 
