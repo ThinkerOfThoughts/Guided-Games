@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
-    <head>
+	<head>
         <meta charset="utf-8">
         <title>Guided Games</title>
+		<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+	   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
        <link rel="stylesheet" href="css/style.css" />
+
+
+	<script src="./search.js"></script>
+	<script src="./profile.js"></script>
 	</head>
     
     <body style="display: inline; height: auto">
@@ -15,15 +25,16 @@
             <img class="logo" src="css/image_resources/guided_games.png"/>
             <a class="top_button_rightleaf top_button:hover" href="forum.html">Forum</a>
             <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
+		<!--added to test search function, if this breaks stuff this is where the problem is-->
+ 		<input type="text" id="searchbox" placeholder="Search..">
+		<button id="searchbutton" onclick="basic_search()">search</button>
+		<!-- end searchbox -->
         </div>
-
-        <!-- Navbar -->
-        <form>
-            <label for="username">Username</label>
-            <input name="username" value="TODO" disabled><br>
-            <label for="email">Email Address</label>
-            <input name="email" value="TODO" disabled><br>
-        </form>
-    </body>
-    <script src="/chat.js"></script>
+		
+	<div id ="user_profile">
+	<br>
+		<!-- content added here by profile.js -->
+	</div>
+	</body>
+    <script src="./login.js"></script>
 </html>
