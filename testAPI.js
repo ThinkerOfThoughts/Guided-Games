@@ -54,11 +54,3 @@ axios.get(base_url + 'SearchDestinyPlayer/-1/' + 'I Sense Danger', config)
 
 
 
-
-
-
-
-
-
-
-
