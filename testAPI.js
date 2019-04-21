@@ -1,3 +1,9 @@
+/*
+This is the file I used to get all the API data and test it.
+Different parts of the data will be displayed in multiple places, so I'll copy the calls from here when needed.
+*/
+
+//Tool used to perform get requests w/ node
 var axios = require('axios')
 
 //Header used to pass the key with each GET request
@@ -8,7 +14,8 @@ var config = {
 //Base API url, to be concatinated w/ further info to get specific data
 var base_url = 'https://www.bungie.net/Platform/Destiny2/';
 
-// Performing a GET request
+// Performing a GET request, hardcoded example is my gamertag but it can be replaced with whatever you need to search
+//TODO -> GET THIS TO WORK FOR BNET USERS 
 axios.get(base_url + 'SearchDestinyPlayer/-1/' + 'I Sense Danger', config)
   .then(function(response){
     console.log(response.data); //prints all response data for error checking
@@ -21,6 +28,8 @@ axios.get(base_url + 'SearchDestinyPlayer/-1/' + 'I Sense Danger', config)
 		.then(function(response){
 			//PVP INFORMATION
 			
+			//Matches played
+			console.log("Matches:", response.data.Response.allPvP.allTime.activitiesEntered.basic.displayValue);
 			//Total PvP kills
 			console.log("PvP kills:", response.data.Response.allPvP.allTime.kills.basic.displayValue);
 			//Total PvP deaths
