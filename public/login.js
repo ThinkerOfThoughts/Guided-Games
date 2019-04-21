@@ -51,7 +51,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 			
 			firebase.auth().signInWithEmailAndPassword(email, password).then(function(response){
 				alert('Logged in!');
-				window.location.href = './home.html';
+				window.location.href = './index.html';
 			}).catch(function(error){
 				var errorCode = error.code;
 				var errorMessage = error.message;

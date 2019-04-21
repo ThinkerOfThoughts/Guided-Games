@@ -60,7 +60,7 @@ function sign_up(event)
 						else
 						{
 							alert('User has been created!');
-							window.location.href = './home.html';
+							window.location.href = './index.html';
 						}
 					});
 					

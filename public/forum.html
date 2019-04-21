@@ -3,7 +3,12 @@
     <head>
         <meta charset="utf-8">
         <title>Guided Games</title>
+		<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-database.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+	   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
        <link rel="stylesheet" href="css/style.css" />
 	   <!--From template-->
 	   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -27,9 +32,7 @@
 	<!--End template-->
 	
     <body>
-    
-<!--From a template -->  
-        <!-- Navbar -->
+	
         <div class = "topbar" align="center">
             <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
             <a class="top_button_rightleaf top_button:hover" href="index.html">Home</a>
@@ -37,21 +40,72 @@
             <a class="top_button_rightleaf top_button:hover" href="forum.html">Forum</a>
             <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
         </div>
-
- <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Guided Games</h1>
-            <input id="username" type="text" placeholder="Username" />
-            <input id="message" type="text" placeholder="Message" />
-            <button id="send">Post</button>
-			<div id="output"></div>
-        </div>
-    </div>
-  </div>
- 
-</div>
-
+	
+	<form id="submit_post">
+		<div class="w3-row w3-padding-32">
+			<div style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="left">
+                <label for="request">Purpose</label>
+				<input id="request" type="text" placeholder="Purpose for request" style="width:300px"/>
+				<br>
+                <input type="submit" name="submit-btn" value="Submit" class="button"/>
+			</div>
+		</div>
+	</form>
+	<div id="forum_posts">
+		
+	</div>
     </body>
-    <script src="./chat.js"></script>
-	<script src="./app.js"></script>
+	
+    <script src="./forum.js"></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
