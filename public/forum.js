@@ -93,7 +93,7 @@ dataref.orderByChild('username').startAt("").endAt("\uf8ff").on("child_added", f
 			+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
 			+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
 			+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
-			+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  '<br>';
+			+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br></div>";
 		});
 	
 	});  
