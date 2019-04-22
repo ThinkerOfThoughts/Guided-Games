@@ -22,14 +22,14 @@ function basic_search()
     //advanced search is what actually does the seraching
 
     return advanced_search(input, 0);
-}
+};
 
 //advance search, requires username, can use usertype
 function advanced_search(input, usertype)
 {
-	var dataref = firebase.database().ref("users/");
+	let dataref = firebase.database().ref("users/");
 
-	var new_window = window.open("search_results_test.html");
+	let new_window = window.open("search_results_test.html");
 
 
 	var usernames = [];	//will hold usernames returned with each search result, seemed simpler than trying to figure out how to
@@ -45,9 +45,10 @@ function advanced_search(input, usertype)
 	//the profile(2) is just so I can work on profile.js, replace with whatever will transfer data correctly when that is found
 
 		counter++;	//having this at the end avoids an off by one error
-	// new_window.document.getElementById("result_button" + counter).addEventListener("click", alert(counter));//"click", profile(username);
+	//new_window.document.getElementById("result_button" + counter).addEventListener("click", alert(counter));//"click", profile(username);
 
 	});
 	//TODO make searchable by criteria other than just username
 	//TODO return more usefull information than just username/email address
-}
+	new_window.document.close();
+};
