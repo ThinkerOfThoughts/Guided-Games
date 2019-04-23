@@ -41,7 +41,7 @@ function advanced_search(input, usertype)
 
 	dataref.orderByChild('username').startAt(input).endAt(input+"\uf8ff").on("child_added", function(snapshot) {
 		usernames.push(snapshot.child("username").val());
-		new_window.document.getElementById('results').innerHTML += '<div align="center"><button id="result_button' + counter + '"  onclick="profile(2)" style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="center">' + usernames[counter] + " : " + snapshot.child("email").val() + '</button></div> <br>  <br> ';
+		new_window.document.getElementById('results').innerHTML += '<div align="center"><button id="result_button' + counter + '"  onclick="profile(\'' + usernames[counter] + '\')" style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="center">' + usernames[counter] + " : " + snapshot.child("email").val() + '</button></div> <br>  <br> ';
 	//the profile(2) is just so I can work on profile.js, replace with whatever will transfer data correctly when that is found
 
 		counter++;	//having this at the end avoids an off by one error

@@ -15,9 +15,6 @@ firebase.initializeApp(config);
 //retrieves the data from the api using the provided username
 function profile(username)
 {
-	//remove when sending data is fixed
-	username = "danger";
-
 	var gamertag = "I Sense Danger"	//remove once gamertags are in database
 	var platform = 1;			//remove once platform type is in database;
 //	1 for XBOX, 2 for PSN, and 4 for BNET I think
@@ -100,7 +97,13 @@ axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config)
 	};
 
 	profile_window.document.close();
-		});
+		}).catch(function(error)	//based on error catcher from signup.js
+			{
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				alert(errorCode);
+				alert(errorMessage);
+			});
 	});
 	/*end API acess stuff */
 
