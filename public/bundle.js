@@ -245,8 +245,76 @@ function post_request(event)
 }
 
 var forum_list = document.getElementById("forum_posts");
-
 var dataref = firebase.database().ref("forum/");
+var type = 0;
+	
+document.getElementById("plat").onchange = function(){
+	if(this.value === "X"){
+		alert("Xbox");
+		var type = 1;
+	}
+	else if(this.value === "P")
+    {
+        alert("PSN");
+		var type = 2;
+    }
+    else if(this.value === "B")
+    {
+        alert("BNET");
+		var type = 4;
+    }
+	
+	dataref.orderByChild('username').startAt("").endAt("\uf8ff").on("child_added", function(snapshot){
+		console.log("type in the second function:", type);
+		//NOTE -> I've copied a lot of the comments from testAPI to clarify things, but you can check there for more details
+		
+		//Header used to pass the key with each GET request
+		var options = {
+			headers: {'X-Api-Key': 'd252a2c04c9b4dc6960daffda4a3e435'}
+		};
+
+		//Base API url, to be concatinated w/ further info to get specific data
+		var base_url = 'https://www.bungie.net/Platform/Destiny2/';
+
+		// Performing a GET request
+		axios.get(base_url + 'SearchDestinyPlayer/' + type + '/' + snapshot.child('account').val(), options)
+			.then(function(response){
+			console.log("The name is", response.data.Response[0].displayName);
+			//Store account ID and user type (Xbox/PSN/BNET) for use in stat fetch
+			var ID = response.data.Response[0].membershipId;
+			//var type = response.data.Response[0].membershipType;
+		
+			axios.get(base_url + type + '/Account/' + ID + '/Character/0/Stats/?modes=None', options)
+				.then(function(response){
+				//Storing fetched data
+				level = response.data.Response.allPvE.allTime.highestCharacterLevel.basic.displayValue;
+				power = response.data.Response.allPvE.allTime.highestLightLevel.basic.displayValue;
+				KD = response.data.Response.allPvP.allTime.killsDeathsRatio.basic.displayValue;
+				matches = response.data.Response.allPvP.allTime.activitiesEntered.basic.displayValue;
+				
+				//Checking to make sure they've completed a raid
+				if(response.data.Response.raid.allTime !== undefined){
+					raids = response.data.Response.raid.allTime.activitiesCleared.basic.displayValue;
+					raidTime = response.data.Response.raid.allTime.fastestCompletionMs.basic.displayValue;
+				}
+				else{
+					raids = 0;
+					raidTime = "0:00.000";
+				}
+				
+				//Displaying the data in the forum
+				forum_list.innerHTML = forum_list.innerHTML + '<div style=\"background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;\" align=\"left\">'
+				+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
+				+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
+				+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
+				+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br></div>";
+			});
+		
+		});  
+	});
+}
+	
+/*
 dataref.orderByChild('username').startAt("").endAt("\uf8ff").on("child_added", function(snapshot){
 	//NOTE -> I've copied a lot of the comments from testAPI to clarify things, but you can check there for more details
 	
@@ -280,11 +348,11 @@ dataref.orderByChild('username').startAt("").endAt("\uf8ff").on("child_added", f
 			+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
 			+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
 			+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
-			+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  '<br>';
+			+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br></div>";
 		});
 	
 	});  
-});
+});*/
 
 document.querySelector('#submit_post').addEventListener('submit', post_request);
 
