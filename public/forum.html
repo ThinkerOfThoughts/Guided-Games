@@ -45,7 +45,6 @@
 	<form id="submit_post">
 		<div class="w3-row w3-padding-32">
 			<div style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="left">
-                <label for="request">Purpose</label>
 				<tr>
 					<select name="Platform" id = "plat">
 						<option disabled selected value> Select Platform </option>
@@ -53,15 +52,17 @@
 						<option value="P">PSN</option>
 						<option value="B">BNET</option>
 					</select>
-					<select name="User type" id = "role" onChange = "getRole();">
+					<select name="User type" id = "role">
 						<option disabled selected value> Select Role </option>
 						<option value="mentor">Mentor</option>
 						<option value="mentee">Mentee</option>
 					</select>
 				</tr>
-				<input id="user" type="text" placeholder="Game Account Name" style="width:300px"/>
+				<input id="user" type="text" placeholder="In-Game Account" style="width:300px"/>
 				<br>
-				<input id="request" type="text" placeholder="Request" style="width:300px"/>
+				<input id="request" type="text" placeholder="Post" style="width:300px"/>
+				<br>
+				<input id="strategy" type="text" placeholder="(Optional): Strategy" style="width:300px"/>
                 <input type="submit" name="submit-btn" value="Submit" class="button"/>
 			</div>
 		</div>

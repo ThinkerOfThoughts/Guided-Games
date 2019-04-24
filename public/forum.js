@@ -18,6 +18,7 @@ function post_request(event)
 	const form = event.target;
 	const acct = form.user.value; 
 	const purpose = form.request.value;
+	const strat = form.strategy.value;
 
 	firebase.auth().onAuthStateChanged(function(user) {
 		if(user)
@@ -31,7 +32,8 @@ function post_request(event)
 				let newData = {
 					username: usernm,
 					post: purpose,
-					account: acct
+					account: acct,
+					theStrat: strat
 				};
 				
 				firebase.database().ref('forum/' + newKey).update(newData, function(error){
@@ -130,13 +132,28 @@ document.getElementById("plat").onchange = function(){
 					raidTime = "0:00.000";
 				}
 				
-				//Displaying the data in the forum
-				forum_list.innerHTML = forum_list.innerHTML + '<div style=\"background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;\" align=\"left\">'
-				+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
-				+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
-				+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
-				+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br>"
-				+ "Role: " + user_role + "<br></div>";
+				link = snapshot.child('theStrat').val();
+				//Display for if there's no strategy link given
+				if(link === null){
+					link = "None";
+					//Displaying the data in the forum
+					forum_list.innerHTML = forum_list.innerHTML + '<div style=\"background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;\" align=\"left\">'
+					+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
+					+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
+					+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
+					+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br>"
+					+ "Role: " + user_role + " Strategy: " + link + "<br></div>";
+				}
+				//Display for if there's a link given
+				else{
+					//Displaying the data in the forum
+					forum_list.innerHTML = forum_list.innerHTML + '<div style=\"background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;\" align=\"left\">'
+					+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
+					+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
+					+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
+					+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br>"
+					+ "Role: " + user_role + " Strategy: " + '<a href="' + link + '">Here</a>' + "<br></div>";
+				}
 			});
 		
 		});  
