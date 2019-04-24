@@ -86,12 +86,13 @@ function sign_up(event)
 				var fastest_time;
 				
 				//request player info from api
-				axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config).then(function(response){
+				axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config_d2).then(function(response){
+					console.log(response.data);
 					var ID = response.data.Response[0].membershipId;	//crashes here
 					var type = response.data.Response[0].membershipType;
 					
 					//gets player info
-					axios.get(base_url + platform + '/Account/' + ID + '/Character/0/Stats/?modes=None', config).then(function(response){
+					axios.get(base_url + platform + '/Account/' + ID + '/Character/0/Stats/?modes=None', config_d2).then(function(response){
 						//PVP INFORMATION
 						
 						//Matches played
@@ -117,10 +118,15 @@ function sign_up(event)
 						highest_level = response.data.Response.allPvE.allTime.highestCharacterLevel.basic.displayValue;
 						//Highest light level
 						power_level = response.data.Response.allPvE.allTime.highestLightLevel.basic.displayValue;
-						//Total raid clears
-						raids_cleared = response.data.Response.raid.allTime.activitiesCleared.basic.displayValue;
-						//Fastest completion
-						fastest_time = response.data.Response.raid.allTime.fastestCompletionMs.basic.displayValue;
+						
+						if(response.data.Response.raid.allTime !== undefined){
+							raids_cleared = response.data.Response.raid.allTime.activitiesCleared.basic.displayValue;
+							fastest_time = response.data.Response.raid.allTime.fastestCompletionMs.basic.displayValue;
+						}
+						else{
+							raids_cleared = 0;
+							fastest_time = "0:00.000";
+						}
 					
 						//loads player info into database
 						firebase.auth().createUserWithEmailAndPassword(email, password).then(function(response){
@@ -129,6 +135,7 @@ function sign_up(event)
 							let newData = {
 								username: username,
 								email: email,
+								gamertag: gamertag,
 								platform: platform,
 								matches: matches,
 								pvp_kills: pvp_kills,
