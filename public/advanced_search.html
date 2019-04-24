@@ -11,7 +11,9 @@
 	   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
        <link rel="stylesheet" href="css/style.css" />
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>	<!-- makes the GET work -->
+
 	<script src="./search.js"></script>
+	<script src="./profile.js"></script>
 	</head>
     
     <body style="display: inline; height: auto">
@@ -26,41 +28,21 @@
 		<!--added to test search function, if this breaks stuff this is where the problem is-->
  		<input type="text" id="searchbox" placeholder="Search..">
 		<button id="searchbutton" onclick="basic_search()">search</button>
-	        <button id="advanced_search" onclick="window.location.href = 'advanced_search.html'">Advanced_search</button>
+	        <button id="advanced_search" href="advanced_search.html">Advanced_search</button>
 		<!-- end searchbox -->
         </div>
 		
-		<div class="w3-row w3-padding-32">
-         <div style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="center">
-            <form id="login">
-                <label for="username">Email</label>
-                <input id="Email" type="text" placeholder="Email" style="width: 300px;" />
-                <br>
-                <label for="username">Password</label>
-                <input id="password" type="password" placeholder="Password" style="width: 300px;"/>
-                <br>
-                <input type="submit" name="submit-btn" value="Login" class="button"/>
-				
-			<div class="row">
-				<a href="./Register.html">Register</a>
-			</div>
-            </form>
-         </div>
-		 
+	<div id ="advanced_search" align="center"> Advanced Search
+	<br>
+		<input type="text" id="advanced_searchbox" placeholder="Advanced Search..">
+		<br>
+		<div id = "raids" align="left" style = "width:300px">
+			<label for="raids" align="left">Minimum Number of Raids Completed:</label>
+			<input type="number" id="raids" min="1" placeholder = "1">
 		</div>
+		<button id="searchbutton" onclick="advanced_search('2')">search</button>
+	</div>
 	</body>
     <script src="./login.js"></script>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
