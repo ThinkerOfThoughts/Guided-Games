@@ -127,6 +127,16 @@ function sign_up(event)
 							raids_cleared = 0;
 							fastest_time = "0:00.000";
 						}
+						
+						var user_type = "mentee";
+						if(power_level >= 500 && (raids_cleared >= 10 || overall_kd >= 1.2))
+						{
+							user_type = "mentor";
+						}
+						else
+						{
+							user_type = "mentee";
+						}
 					
 						//loads player info into database
 						firebase.auth().createUserWithEmailAndPassword(email, password).then(function(response){
@@ -142,6 +152,7 @@ function sign_up(event)
 								pvp_deaths: pvp_deaths,
 								overall_kd: overall_kd,
 								overall_kda_game: overall_kda_game,
+								user_type: user_type,
 								most_kills_game: most_kills_game,
 								longest_streak: longest_streak,
 								win_loss: win_loss,
