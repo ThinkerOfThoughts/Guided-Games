@@ -15,7 +15,7 @@ firebase.initializeApp(config);
 //retrieves the data from the api using the provided username
 function profile(username)
 {
-	var gamertag = "I Sense Danger"	//remove once gamertags are in database
+/*	var gamertag = "I Sense Danger"	//remove once gamertags are in database
 	var platform = 1;			//remove once platform type is in database;
 //	1 for XBOX, 2 for PSN, and 4 for BNET I think
 
@@ -38,10 +38,10 @@ function profile(username)
 		gamertag = snapshot.child("gamertag").val());
 		platform = snapshot.child("platform").val());
 	};
-*/
+
 	/* start API acess stuff */
 //Header used to pass the key with each GET request
-var config = {
+/*var config = {
   headers: {'X-Api-Key': 'd252a2c04c9b4dc6960daffda4a3e435'}
 };
 
@@ -85,25 +85,29 @@ axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config)
 				raids_cleared = response.data.Response.raid.allTime.activitiesCleared.basic.displayValue;
 				//Fastest completion
 				fastest_time = response.data.Response.raid.allTime.fastestCompletionMs.basic.displayValue;
+*/
 
+		let dataref = firebase.database().ref("users/");
+	dataref.orderByChild('username').startAt(username).endAt(username+"\uf8ff").on("child_added", function(snapshot) {
 
-	let profile_window = window.open("user_profile.html", "Profile", "");
+		let profile_window = window.open("user_profile.html", "Profile", "");
 
-	//TODO figure out how to transfer username into this function
-	//TODO add code to put data from api into user_profile.html
-	profile_window.window.onload = function() {
-	profile_window.document.getElementById("user_profile").innerHTML += '<div class="profile_header" align="center"> <div class="username" align="center"> ' + username + ' </div><br><div class="gamertag" align="center"> ' + gamertag + ' </div></div> <br> <div class = "PVE_stats" align="center"> PVE Stats <br> <div class="power" align="left"> Power Level: ' + power_level + '</div><div class="level" align="right"> Hieghest Character Level: ' + highest_level + '</div> <br><div class "raids" align="left"> Raids cleared: ' + raids_cleared + '<div class "time" align="right"> Fastest Time (in min) : ' + fastest_time + '</div> </div> <br> <br>'
-+ '<div class = "PVP_stats" align="center"> PVP Stats <br> <div class "Matches" align="left"> Matches Played: ' + matches + '</div> <div class="kills" align="right"> PVP Kills: ' + pvp_kills + '</div> <br> <div class "deaths" align="left"> PVP Deaths: ' + pvp_deaths + '</div></div> <div class "time" align="right"> Fastest Time (in min) : ' + fastest_time + '</div> </div>' ;
-	};
+		//TODO figure out how to transfer username into this function
+		//TODO add code to put data from api into user_profile.html
+		profile_window.window.onload = function() {
+		profile_window.document.getElementById("user_profile").innerHTML += '<div class="profile_header" align="center"> <div class="username" align="center"> ' + username + ' </div><br><div class="gamertag" align="center"> ' + snapshot.child("gamertag").val() + ' </div></div> <br> <div class = "PVE_stats" align="center"> PVE Stats <br> <div class="power" align="left"> Power Level: ' + snapshot.child("power_level").val() + '</div><div class="level" align="right"> Hieghest Character Level: ' + snapshot.child("highest_level").val() + '</div> <br><div class "raids" align="left"> Raids cleared: ' + snapshot.child("raids_cleared").val() + '<div class "time" align="right"> Fastest Time (in min) : ' + snapshot.child("fastest_time").val() + '</div> </div> <br> <br>'
+	+ '<div class = "PVP_stats" align="center"> PVP Stats <br> <div class "Matches" align="left"> Matches Played: ' + snapshot.child("matches").val() + '</div> <div class="kills" align="right"> PVP Kills: ' + snapshot.child("pvp_kills").val() + '</div> <br> <div class "deaths" align="left"> PVP Deaths: ' + snapshot.child("pvp_deaths").val() + '</div></div> <div class "time" align="right"></div> </div>' ;
+		};
 
-	profile_window.document.close();
-		}).catch(function(error)	//based on error catcher from signup.js
-			{
-				var errorCode = error.code;
-				var errorMessage = error.message;
-				alert(errorCode);
-				alert(errorMessage);
-			});
+		profile_window.document.close();
+			/*}).catch(function(error)	//based on error catcher from signup.js
+				{
+					var errorCode = error.code;
+					var errorMessage = error.message;
+					alert(errorCode);
+					alert(errorMessage);
+				});*/
+		//});
 	});
 	/*end API acess stuff */
 
