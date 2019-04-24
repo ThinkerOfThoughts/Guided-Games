@@ -15,11 +15,14 @@ firebase.initializeApp(config);
 function sign_up(event)
 {
 	event.preventDefault();
+	
+	//d2 api info
 	var config_d2 = {
 	  headers: {'X-Api-Key': 'd252a2c04c9b4dc6960daffda4a3e435'}
 	};
 	var base_url = 'https://www.bungie.net/Platform/Destiny2/';
 	
+	//gets variables from form
 	const form = event.target;
 	const email = form.Email.value;
 	const password = form.password.value;
@@ -34,12 +37,14 @@ function sign_up(event)
 	else if(platform == "PC")
 		platform = 4;
 	
+	//creates reference to database
 	var dataref = firebase.database().ref("users/");
 	
+	//checks to see if username already exists
 	dataref.orderByChild('username').equalTo(username).once("value", function(snapshot){
 		if(!(snapshot.exists()))
 		{
-			
+			//basic validation
 			if(password != password2)
 			{
 				alert("Passwords do not match!");
@@ -66,6 +71,7 @@ function sign_up(event)
 			}
 			else
 			{
+				//success so begin declaring info to be pulled from api
 				var matches;
 				var pvp_kills;
 				var pvp_deaths;
@@ -78,10 +84,13 @@ function sign_up(event)
 				var power_level;
 				var raids_cleared;
 				var fastest_time;
+				
+				//request player info from api
 				axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config).then(function(response){
-					var ID = response.data.Response[0].membershipId;
+					var ID = response.data.Response[0].membershipId;	//crashes here
 					var type = response.data.Response[0].membershipType;
 					
+					//gets player info
 					axios.get(base_url + platform + '/Account/' + ID + '/Character/0/Stats/?modes=None', config).then(function(response){
 						//PVP INFORMATION
 						
@@ -113,6 +122,7 @@ function sign_up(event)
 						//Fastest completion
 						fastest_time = response.data.Response.raid.allTime.fastestCompletionMs.basic.displayValue;
 					
+						//loads player info into database
 						firebase.auth().createUserWithEmailAndPassword(email, password).then(function(response){
 							let users = firebase.database().ref('users');
 							const newKey = users.push().key;
