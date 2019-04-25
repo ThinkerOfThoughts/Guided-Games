@@ -25,6 +25,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 			owner.innerHTML = owner.innerHTML + '<form id=\"user_info\"><div class=\"w3-row w3-padding-32\" align=\"center\">'
 				+ '<div>' + temp_name + '</div><div>' + temp_mail + '</div>'
 				+ '<div> Insert information about user\'s game character here </div>'
+				+ '<div> <a href=\"./communication.html\">Communication</a></div>'
 				+ '<input type=\"submit\" name=\"submit-btn\" value=\"Logout\" class=\"button\">'
 				+ '</div></form>';
 			function logout(event)
