@@ -59,7 +59,7 @@ function post_request(event)
 	});
 }
 
-var forum_list = document.getElementById("forum_container");
+var forum_list = document.getElementById("forum_posts");
 var dataref = firebase.database().ref("forum/");
 var type = 0;
 var user_role = "tbd";
@@ -136,6 +136,21 @@ document.getElementById("plat").onchange = function(){
 				//Display for if there's no strategy link given
 				if(link === null){
 					link = "None";
+					forum_list.innerHTML += '<div class="forum_layout">' 
+					+ "<table class = 'top_table'>" 
+					+ "<tr><th>" + snapshot.child('account').val() + '</tr></th>'
+                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + user_role + "</tr></td></table><br>"
+                   
+					+ "<table class = 'mid_table'>"
+					+ "<tr><td>" + snapshot.child("post").val() + "</tr></td></table>"
+					+ '</div> <br><br>';
+					
+					/*
+					+ "<table class = 'end_table'>"
+					+ "<tr><td>" + "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '</tr></td></table>'
+					+ '</div> <br><br>';
+					*/
+					
 					//Displaying the data in the forum
 					/*
 					forum_list.innerHTML = forum_list.innerHTML
@@ -149,10 +164,20 @@ document.getElementById("plat").onchange = function(){
 				//Display for if there's a link given
 				else{
 					//Displaying the data in the forum
-					forum_list.innerHTML = forum_list.innerHTML
-					+ "<tr><th>" + snapshot.child('account').val() + "</tr></th><br>"
-					+ "<tr>" + "Level: " + level + " Power: " + power + "</tr><br>"
-					+ snapshot.child("post").val() + "<br><br>";
+					forum_list.innerHTML += '<div class="forum_layout">' 
+					+ "<table class = 'top_table'>" 
+					+ "<tr><th>" + snapshot.child('account').val() + '</tr></th>'
+                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + user_role + "</tr></td></table><br>"
+                    
+					+ "<table class = 'mid_table'>"
+					+ "<tr><td>" + snapshot.child("post").val() + "</tr></td></table>"
+					+ '</div> <br><br>';
+					
+					/*
+					+ "<table class = 'end_table'>"
+					+ "<tr><td>" + "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '</tr></td></table>'
+					+ '</div> <br><br>';
+					*/
 					
 					/*
 					+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
