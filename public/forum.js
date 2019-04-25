@@ -59,7 +59,7 @@ function post_request(event)
 	});
 }
 
-var forum_list = document.getElementById("forum_posts");
+var forum_list = document.getElementById("forum_container");
 var dataref = firebase.database().ref("forum/");
 var type = 0;
 var user_role = "tbd";
@@ -137,26 +137,33 @@ document.getElementById("plat").onchange = function(){
 				if(link === null){
 					link = "None";
 					//Displaying the data in the forum
-					forum_list.innerHTML = forum_list.innerHTML + '<div style=\"background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;\" align=\"left\">'
+					/*
+					forum_list.innerHTML = forum_list.innerHTML
 					+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
 					+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
 					+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
 					+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br>"
-					+ "Role: " + user_role + " Strategy: " + link + "<br></div>";
+					+ "Role: " + user_role + " Strategy: " + link + "<br><br></div>";
+					*/
 				}
 				//Display for if there's a link given
 				else{
 					//Displaying the data in the forum
-					forum_list.innerHTML = forum_list.innerHTML + '<div style=\"background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;\" align=\"left\">'
+					forum_list.innerHTML = forum_list.innerHTML
+					+ "<tr><th>" + snapshot.child('account').val() + "</tr></th><br>"
+					+ "<tr>" + "Level: " + level + " Power: " + power + "</tr><br>"
+					+ snapshot.child("post").val() + "<br><br>";
+					
+					/*
 					+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
 					+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
 					+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
 					+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br>"
-					+ "Role: " + user_role + " Strategy: " + '<a href="' + link + '">Here</a>' + "<br></div>";
+					+ "Role: " + user_role + " Strategy: " + '<a href="' + link + '">Here</a>' + "<br><br></div>";
+					*/
 				}
 			});
-		
-		});  
+		}); 
 	});
 	}
 	
