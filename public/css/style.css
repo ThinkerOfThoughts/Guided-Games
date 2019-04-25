@@ -79,6 +79,17 @@ body {
 	border-radius: 5px;
 }
 
+#search_table{
+	width:50%; 
+    margin-left:38%; 
+	margin-right: 38%;
+}
+
+#searchbox{
+	border-radius: 5px;
+	
+}
+
 .button{
 	border-radius: 5px;
 }
