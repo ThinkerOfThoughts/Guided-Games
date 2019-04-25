@@ -63,11 +63,24 @@ body {
 	margin-left: 20px;
 }
 
-.bottom_table{
-	background-color:#87DCFF;
+.forum_box{
+	background-color:#87DCFF; 
 	text-align:left; 
-	margin-top: 0px;
-	margin-left: 20px;
+	vertical-align: middle; 
+	padding:20px 47px; 
+	width:420px; 
+	margin:0 auto;
+	align: left;
+	border-radius: 15px;
+}
+
+#user, #request, #strategy{
+	width:300px;
+	border-radius: 5px;
+}
+
+.button{
+	border-radius: 5px;
 }
 
 select {
