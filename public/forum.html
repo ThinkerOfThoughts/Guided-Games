@@ -42,7 +42,16 @@
             <img class="logo_scrollwork" src="css/image_resources/scrollwork.gif"/>
         </div>
 	
-	<form id="submit_post">
+	<table id ="search_table">
+	<tr><td>
+	<input type="text" input id="searchbox" placeholder="Search Users">
+	<button id="searchbutton" onclick="basic_search()">Search</button>
+	<button id="advanced_search" onclick="window.location.href = 'advanced_search.html'">Advanced Search</button>
+	</td></tr>
+	</table>
+	<br>
+	
+	<form id="submit_post" >
 		<div class="forum_box">
 				<tr>
 					<select name="Platform" id = "plat">
@@ -68,11 +77,12 @@
 		<br>
 	</form>
 	<div id="forum_posts" class = "forum_posts2">
-		
+	
 	</div>
     </body>
 	
     <script src="./forum.js"></script>
+	<script src="./search.js"></script>
 </html>
 
 

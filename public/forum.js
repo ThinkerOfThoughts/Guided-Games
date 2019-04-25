@@ -148,6 +148,7 @@ document.getElementById("plat").onchange = function(){
 					
 					+ "<table class = 'mid_table'>"
 					+ "<tr><td>" + snapshot.child("post").val() + "</tr></td></table>"
+					+ snapshot.child('username').val()
 					+ '</div> <br><br>';
 					
 					//Displaying the data in the forum
@@ -175,6 +176,7 @@ document.getElementById("plat").onchange = function(){
                     
 					+ "<table class = 'mid_table'>"
 					+ "<tr><td>" + snapshot.child("post").val() + "</tr></td></table>"
+					+ snapshot.child('username').val()
 					+ '</div> <br><br>';
 					
 					/*
