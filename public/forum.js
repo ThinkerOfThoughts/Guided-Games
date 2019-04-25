@@ -149,10 +149,9 @@ document.getElementById("plat").onchange = function(){
 				//Display for if there's a link given
 				else{
 					//Displaying the data in the forum
-					forum_list.innerHTML = forum_list.innerHTML
-					+ "<tr><th>" + snapshot.child('account').val() + "</tr></th><br>"
-					+ "<tr>" + "Level: " + level + " Power: " + power + "</tr><br>"
-					+ snapshot.child("post").val() + "<br><br>";
+					forum_list.innerHTML += '<div style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="center">' + snapshot.child('account').val() + '<br>'
+					+ 'Level: ' + level + ' Power: ' + power + '<br>'
+					+ snapshot.child("post").val() + '</div> <br><br>';
 					
 					/*
 					+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
