@@ -106,6 +106,7 @@ document.getElementById("plat").onchange = function(){
 		
 		var account = snapshot.child('account').val();
 		
+		console.log("The account is:", account);
 		// Performing a GET request
 		axios.get(base_url + 'SearchDestinyPlayer/' + type + '/' + account, options)
 			.then(function(response){
@@ -138,18 +139,17 @@ document.getElementById("plat").onchange = function(){
 					link = "None";
 					forum_list.innerHTML += '<div class="forum_layout">' 
 					+ "<table class = 'top_table'>" 
-					+ "<tr><th>" + snapshot.child('account').val() + '</tr></th>'
-                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + user_role + "</tr></td></table><br>"
-                   
+					+ "<tr><th>" + snapshot.child('account').val() + "<th align = right>" + "PvP: " + KD + " KD " + " | " + matches + " Matches Played "
+					+ '</tr></th>'
+					
+                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + user_role 
+					
+					+ "<td align = right>" + "<b>" + "PvE: " + raids + " Raids " + " | " + raidTime + " Fastest Time " + "</tr></td></b>"
+					+ "</table><br>"
+					
 					+ "<table class = 'mid_table'>"
 					+ "<tr><td>" + snapshot.child("post").val() + "</tr></td></table>"
 					+ '</div> <br><br>';
-					
-					/*
-					+ "<table class = 'end_table'>"
-					+ "<tr><td>" + "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '</tr></td></table>'
-					+ '</div> <br><br>';
-					*/
 					
 					//Displaying the data in the forum
 					/*
@@ -166,18 +166,17 @@ document.getElementById("plat").onchange = function(){
 					//Displaying the data in the forum
 					forum_list.innerHTML += '<div class="forum_layout">' 
 					+ "<table class = 'top_table'>" 
-					+ "<tr><th>" + snapshot.child('account').val() + '</tr></th>'
-                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + user_role + "</tr></td></table><br>"
+					+ "<tr><th>" + snapshot.child('account').val() 
+					+ "<th align = right>" + "PvP: " + KD + " KD " + " | " + matches + " Matches Played "
+					+ '</tr></th>'
+                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + user_role 
+					
+					+ "<td align = right>" + "<b>" + "PvE: " + raids + " Raids " + " | " + raidTime + " Fastest Time " + "</tr></td></b>"
+					+ "</table><br>"
                     
 					+ "<table class = 'mid_table'>"
 					+ "<tr><td>" + snapshot.child("post").val() + "</tr></td></table>"
 					+ '</div> <br><br>';
-					
-					/*
-					+ "<table class = 'end_table'>"
-					+ "<tr><td>" + "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '</tr></td></table>'
-					+ '</div> <br><br>';
-					*/
 					
 					/*
 					+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
@@ -263,19 +262,6 @@ document.getElementById("plat").onchange = function(){
 }
 
 document.querySelector('#submit_post').addEventListener('submit', post_request);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
