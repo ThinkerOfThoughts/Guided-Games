@@ -33,7 +33,7 @@ function post_request(event)
 					username: usernm,
 					post: purpose,
 					account: acct,
-					theStrat: strat
+					theStrat: strat,
 				};
 				
 				firebase.database().ref('forum/' + newKey).update(newData, function(error){
@@ -61,9 +61,8 @@ function post_request(event)
 
 var forum_list = document.getElementById("forum_posts");
 var dataref = firebase.database().ref("forum/");
-var type = 0;
 var user_role = "tbd";
-				
+
 //Function to check for platform change	
 document.getElementById("plat").onchange = function(){
 	//The platform is Xbox
@@ -83,7 +82,7 @@ document.getElementById("plat").onchange = function(){
         alert("BNET");
 		var type = 4;
     }
-	
+
 	//Function to check if the user is a mentor or mentee
 	document.getElementById("role").onchange = function(){
 		if(this.value === "mentor"){
@@ -92,6 +91,7 @@ document.getElementById("plat").onchange = function(){
 		else if(this.value === "mentee"){
 			user_role = "Mentee";
 		}
+	}
 		//Function for getting and printing API data to the forum
 		dataref.orderByChild('username').startAt("").endAt("\uf8ff").on("child_added", function(snapshot){
 		//NOTE -> I've copied a lot of the comments from testAPI to clarify things, but you can check there for more details
@@ -103,7 +103,6 @@ document.getElementById("plat").onchange = function(){
 
 		//Base API url, to be concatinated w/ further info to get specific data
 		var base_url = 'https://www.bungie.net/Platform/Destiny2/';
-		
 		var account = snapshot.child('account').val();
 		
 		console.log("The account is:", account);
@@ -189,76 +188,7 @@ document.getElementById("plat").onchange = function(){
 			});
 		}); 
 	});
-	}
-	
-	/*
-	//Function for getting and printing API data to the forum
-	dataref.orderByChild('username').startAt("").endAt("\uf8ff").on("child_added", function(snapshot){
-		//NOTE -> I've copied a lot of the comments from testAPI to clarify things, but you can check there for more details
-		
-		//Header used to pass the key with each GET request
-		var options = {
-			headers: {'X-Api-Key': 'd252a2c04c9b4dc6960daffda4a3e435'}
-		};
-
-		//Base API url, to be concatinated w/ further info to get specific data
-		var base_url = 'https://www.bungie.net/Platform/Destiny2/';
-		
-		var account = snapshot.child('account').val();
-		
-		// Performing a GET request
-		axios.get(base_url + 'SearchDestinyPlayer/' + type + '/' + account, options)
-			.then(function(response){
-			console.log("The name is", response.data.Response[0].displayName);
-			//Store account ID and user type (Xbox/PSN/BNET) for use in stat fetch
-			var ID = response.data.Response[0].membershipId;
-			//var type = response.data.Response[0].membershipType;
-		
-			axios.get(base_url + type + '/Account/' + ID + '/Character/0/Stats/?modes=None', options)
-				.then(function(response){
-				//Storing fetched data
-				level = response.data.Response.allPvE.allTime.highestCharacterLevel.basic.displayValue;
-				power = response.data.Response.allPvE.allTime.highestLightLevel.basic.displayValue;
-				KD = response.data.Response.allPvP.allTime.killsDeathsRatio.basic.displayValue;
-				matches = response.data.Response.allPvP.allTime.activitiesEntered.basic.displayValue;
-				
-				//Checking to make sure they've completed a raid
-				if(response.data.Response.raid.allTime !== undefined){
-					raids = response.data.Response.raid.allTime.activitiesCleared.basic.displayValue;
-					raidTime = response.data.Response.raid.allTime.fastestCompletionMs.basic.displayValue;
-				}
-				else{
-					raids = 0;
-					raidTime = "0:00.000";
-				}
-				/*
-				//Function to check if the user is a mentor or mentee
-				document.getElementById("role").onchange = function(){
-					if(this.value === "mentor"){
-						user_role = "Mentor";
-					}
-					else if(this.value === "mentee")
-					{
-						user_role = "Mentee";
-					}
-					console.log("USER ROLE FROM FUNC:", user_role);
-					//return user_role;
-				}
-				document.getElementById("role").onchange();
-				
-				
-				//Displaying the data in the forum
-				forum_list.innerHTML = forum_list.innerHTML + '<div style=\"background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;\" align=\"left\">'
-				+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
-				+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
-				+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
-				+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br>";
-				//+ "Role: " + getRole() + "<br></div>";
-			});
-		
-		});  
-	});
-	*/
+	//}
 }
 
 document.querySelector('#submit_post').addEventListener('submit', post_request);
