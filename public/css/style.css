@@ -9,6 +9,72 @@ body {
     font-family: 'Nunito';
 }
 
+/*
+#forum_container{
+	background-color:#87DCFF;
+	text-align:left; 
+	vertical-align: middle; 
+	padding:20px 47px; 
+	width:900px; 
+	height: 164px;
+	margin:0 auto;
+	align: left;
+	border: 1px solid black;
+	align: center;
+}
+
+#forum_container th{
+	border: 2px solid #73AD21;
+	border-radius: 25px;
+}
+*/
+
+.forum_layout{
+	background-color:#87DCFF;
+	text-align:left; 
+	vertical-align: middle; 
+	width:900px; 
+	height: 164px;
+	margin:0 auto;
+	margin-left: 20px
+	align: left;
+	border: 1px solid black;
+	border-radius: 15px;
+	align: center;
+}
+
+.top_table{
+	position:relative;
+	padding: 10px 20px; 
+	width:900px; 
+	height: 60px;
+	background-color: rgba(96,96,96,0.4);
+	text-align: left;
+	border: 1px solid black;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+
+
+.mid_table{
+	background-color:#87DCFF;
+	text-align:left; 
+	margin-top: 0px;
+	margin-left: 20px;
+}
+
+.bottom_table{
+	background-color:#87DCFF;
+	text-align:left; 
+	margin-top: 0px;
+	margin-left: 20px;
+}
+
+select {
+    height: 20px;
+    border: 1px solid #555;
+    border-radius: 3px;
+}
 .logo
 {
     max-width: 25%;
