@@ -1,5 +1,4 @@
-//I'm using Browserify to allow requires -> this file will be bundled into bundle.js for use in forum.html
-//var axios = require('axios');
+//Connect to socket, get configuration for Firebase, and init the app w/ Firebase
 var socket = io.connect('http://localhost:3000');
 var config = {
     apiKey: "AIzaSyD1lj9odK753YVBGQECer5DplzZ6AYiNM8",
@@ -11,6 +10,9 @@ var config = {
   };
 firebase.initializeApp(config);
 
+/*The Firebase post_request was completed by Luiz & Hannah. I (Heaven) added a couple variables into it for my purposes and 
+created the rest of this file to populate the forum posts with API info and display them correctly.
+*/
 function post_request(event)
 {
 	event.preventDefault();
@@ -59,9 +61,9 @@ function post_request(event)
 	});
 }
 
+//Reference the forum part of the database
 var forum_list = document.getElementById("forum_posts");
 var dataref = firebase.database().ref("forum/");
-var user_role = "tbd";
 
 //Function to check for platform change	
 document.getElementById("plat").onchange = function(){
@@ -127,65 +129,49 @@ document.getElementById("plat").onchange = function(){
 					raids = response.data.Response.raid.allTime.activitiesCleared.basic.displayValue;
 					raidTime = response.data.Response.raid.allTime.fastestCompletionMs.basic.displayValue;
 				}
+				//If they haven't, set raid and clear time to 0
 				else{
 					raids = 0;
 					raidTime = "0:00.000";
 				}
 				
 				link = snapshot.child('theStrat').val();
-				//Display for if there's no strategy link given
+				//Forum display for if there's no strategy link given
 				if(link === null){
-					link = "None";
 					forum_list.innerHTML += '<div class="forum_layout">' 
 					+ "<table class = 'top_table'>" 
 					+ "<tr><th>" + snapshot.child('account').val() + "<th align = right>" + "PvP: " + KD + " KD " + " | " + matches + " Matches Played "
 					+ '</tr></th>'
 					
-                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + snapshot.child('user_type').val()
+                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + snapshot.child('user_type').val()+ " | " + "Strategy: " + 'N/A'
 					
 					+ "<td align = right>" + "<b>" + "PvE: " + raids + " Raids " + " | " + raidTime + " Fastest Time " + "</tr></td></b>"
 					+ "</table><br>"
 					
 					+ "<table class = 'mid_table'>"
-					+ "<tr><td>" + snapshot.child("post").val() + "</tr></td></table>"
-					+ snapshot.child('username').val()
+					+ "<tr><td>" + snapshot.child("post").val() + "<br>"
+					+ " - " + snapshot.child('username').val()
+					+ "</tr></td></table>"
 					+ '</div> <br><br>';
-					
-					//Displaying the data in the forum
-					/*
-					forum_list.innerHTML = forum_list.innerHTML
-					+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
-					+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
-					+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
-					+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br>"
-					+ "Role: " + user_role + " Strategy: " + link + "<br><br></div>";
-					*/
 				}
 				//Display for if there's a link given
 				else{
-					//Displaying the data in the forum
 					forum_list.innerHTML += '<div class="forum_layout">' 
 					+ "<table class = 'top_table'>" 
 					+ "<tr><th>" + snapshot.child('account').val() 
 					+ "<th align = right>" + "PvP: " + KD + " KD " + " | " + matches + " Matches Played "
 					+ '</tr></th>'
-                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + snapshot.child("user_type").val()
+                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + snapshot.child("user_type").val() + " | " + "Strategy: " + '<a href="' + link + '">Here</a>'
 					
 					+ "<td align = right>" + "<b>" + "PvE: " + raids + " Raids " + " | " + raidTime + " Fastest Time " + "</tr></td></b>"
 					+ "</table><br>"
                     
 					+ "<table class = 'mid_table'>"
-					+ "<tr><td>" + snapshot.child("post").val() + "</tr></td></table>"
-					+ snapshot.child('username').val()
-					+ '</div> <br><br>';
+					+ "<tr><td>" + snapshot.child("post").val() + "<br>"
+					+ " - " + snapshot.child('username').val()
+					+ "</tr></td></table>"
 					
-					/*
-					+ snapshot.child("post").val() + ' : ' + snapshot.child('username').val() + ' : ' + snapshot.child('account').val() 
-					+ '<br>' + "Level: " + level + " Power: " + power + "<br>"
-					+ "PvP: " + KD + " KD " + " - " + matches + " Matches Played " + '<br>'
-					+ "PvE: " + raids + " Raid Clears " + " - " + raidTime + " Fastest Time " +  "<br>"
-					+ "Role: " + user_role + " Strategy: " + '<a href="' + link + '">Here</a>' + "<br><br></div>";
-					*/
+					+ '</div> <br><br>';
 				}
 			});
 		}); 
