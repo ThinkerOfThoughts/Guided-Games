@@ -96,26 +96,30 @@ body {
 	width:900px; 
 	margin:0 auto;
 	align: middle;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
 }
 
-#profile_pvp{
-	position: absolute;
+.profile_pvp{
 	background-color:#87DCFF; 
 	padding:20px 47px; 
 	width:900px; 
-	margin-left: 318px;
+	margin: 0 auto;
 	align: middle;
-	z-index: 0;
+	position: relative;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 }
 
-#profile_pve{
-	position: absolute;
-	background: transparent; 
+.profile_pve{
+	background-color: transparent; 
 	padding:20px 47px; 
 	width:900px; 
-	margin:0 auto;
+	margin: 0 auto;
 	align: middle;
-	z-index: 1;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 
 
