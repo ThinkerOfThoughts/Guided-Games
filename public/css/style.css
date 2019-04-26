@@ -90,6 +90,35 @@ body {
 	
 }
 
+.profile_header{
+	background-color:#87DCFF; 
+	padding:20px 47px; 
+	width:900px; 
+	margin:0 auto;
+	align: middle;
+}
+
+#profile_pvp{
+	position: absolute;
+	background-color:#87DCFF; 
+	padding:20px 47px; 
+	width:900px; 
+	margin-left: 318px;
+	align: middle;
+	z-index: 0;
+}
+
+#profile_pve{
+	position: absolute;
+	background: transparent; 
+	padding:20px 47px; 
+	width:900px; 
+	margin:0 auto;
+	align: middle;
+	z-index: 1;
+}
+
+
 .button{
 	border-radius: 5px;
 }
