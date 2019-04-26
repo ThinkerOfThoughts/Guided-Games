@@ -128,7 +128,7 @@ axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config)
 		+ "Fastest Time (In Minutes): " + snapshot.child("fastest_time").val() + "<br></table></div></div>"
 		};
 
-		profile_window.document.close();
+		document.close();
 			/*}).catch(function(error)	//based on error catcher from signup.js
 				{
 					var errorCode = error.code;

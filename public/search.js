@@ -56,6 +56,7 @@ function advanced_search(searchtype)
 		}
 		else if(searchtype === 2)
 		{
+			
 			//handling data collection
 			//default minimum values
 			var matches = 0;
@@ -131,15 +132,18 @@ function advanced_search(searchtype)
 
 			dataref.orderByChild('username').startAt(input).endAt(input+"\uf8ff").on("child_added", function(snapshot)
 			{
-				if(snapshot.child("matches").val() >= matches && snapshot.child("pvp_kills").val() >= pvp_kills && 				snapshot.child("overall_kd").val() >= overall_kd && snapshot.child("overall_kda_game").val() >= overall_kda_game && 			snapshot.child("most_kills_game").val() >= most_kills_game && snapshot.child("longest_streak").val() >= longest_streak 				&& snapshot.child("win_loss").val() >= win_loss && snapshot.child("highest_level").val() >= highest_level && 				snapshot.child("power_level").val() >= power_level && snapshot.child("raids_cleared").val() >= raids_cleared)// && 			snapshot.child("fastest_time").val() <= fastest_time)
+				if((snapshot.child("matches").val() >= matches) && (snapshot.child("pvp_kills").val() >= pvp_kills)
+				&& (snapshot.child("overall_kd").val() >= overall_kd) && (snapshot.child("overall_kda_game").val() >= overall_kda_game) 
+					&& (snapshot.child("most_kills_game").val() >= most_kills_game) && (snapshot.child("longest_streak").val() >= longest_streak)
+					&& (snapshot.child("win_loss").val() >= win_loss) && (snapshot.child("highest_level").val() >= highest_level) && 
+					(snapshot.child("power_level").val() >= power_level) && (snapshot.child("raids_cleared").val() >= raids_cleared))
 				{
 					usernames.push(snapshot.child("username").val());
-				new_window.document.getElementById('results').innerHTML += '<div align="center"><button id="result_button' + counter + '"  onclick="profile(\'' + usernames[counter] + '\')" style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="center">' + usernames[counter] + " : " + snapshot.child("email").val() + '</button></div> <br>  <br> ';
-				counter++;	//having this at the end avoids an off by one error
-
+					new_window.document.getElementById('results').innerHTML += '<div align="center"><button id="result_button' + counter + '"  onclick="profile(\'' + usernames[counter] + '\')" style="background-color:#87DCFF; text-align:left; vertical-align: middle; padding:20px 47px; width:420px; margin:0 auto;" align="center">' + usernames[counter] + " : " + snapshot.child("email").val() + '</button></div> <br>  <br> ';
+					counter++;	//having this at the end avoids an off by one error
 				}
 			});
 		}
 	}
-	new_window.document.close();
+	document.close();
 }
