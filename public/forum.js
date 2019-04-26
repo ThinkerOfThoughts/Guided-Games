@@ -83,6 +83,7 @@ document.getElementById("plat").onchange = function(){
 		var type = 4;
     }
 
+	/*
 	//Function to check if the user is a mentor or mentee
 	document.getElementById("role").onchange = function(){
 		if(this.value === "mentor"){
@@ -91,7 +92,7 @@ document.getElementById("plat").onchange = function(){
 		else if(this.value === "mentee"){
 			user_role = "Mentee";
 		}
-	}
+	}*/
 		//Function for getting and printing API data to the forum
 		dataref.orderByChild('username').startAt("").endAt("\uf8ff").on("child_added", function(snapshot){
 		//NOTE -> I've copied a lot of the comments from testAPI to clarify things, but you can check there for more details
@@ -104,7 +105,6 @@ document.getElementById("plat").onchange = function(){
 		//Base API url, to be concatinated w/ further info to get specific data
 		var base_url = 'https://www.bungie.net/Platform/Destiny2/';
 		var account = snapshot.child('account').val();
-		
 		console.log("The account is:", account);
 		// Performing a GET request
 		axios.get(base_url + 'SearchDestinyPlayer/' + type + '/' + account, options)
@@ -141,7 +141,7 @@ document.getElementById("plat").onchange = function(){
 					+ "<tr><th>" + snapshot.child('account').val() + "<th align = right>" + "PvP: " + KD + " KD " + " | " + matches + " Matches Played "
 					+ '</tr></th>'
 					
-                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + user_role 
+                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + snapshot.child('user_type').val()
 					
 					+ "<td align = right>" + "<b>" + "PvE: " + raids + " Raids " + " | " + raidTime + " Fastest Time " + "</tr></td></b>"
 					+ "</table><br>"
@@ -169,7 +169,7 @@ document.getElementById("plat").onchange = function(){
 					+ "<tr><th>" + snapshot.child('account').val() 
 					+ "<th align = right>" + "PvP: " + KD + " KD " + " | " + matches + " Matches Played "
 					+ '</tr></th>'
-                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + user_role 
+                    + "<tr><td>" + 'Level: ' + level + " | " + ' Power: ' + power + " | " + " Role: " + snapshot.child("user_type").val()
 					
 					+ "<td align = right>" + "<b>" + "PvE: " + raids + " Raids " + " | " + raidTime + " Fastest Time " + "</tr></td></b>"
 					+ "</table><br>"
