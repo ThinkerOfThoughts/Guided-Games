@@ -106,8 +106,6 @@ axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config)
 			platform = "PC";
 		}
 
-		//TODO figure out how to transfer username into this function
-		//TODO add code to put data from api into user_profile.html
 		profile_window.window.onload = function() {
 		profile_window.document.getElementById("user_profile").innerHTML += "<div class='profile_layout'>"
 		//Username, account, and level/power/role on the top
@@ -115,21 +113,20 @@ axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config)
 		+ snapshot.child("gamertag").val() + "<br>"
 		+ 'Level: ' + snapshot.child("highest_level").val() + " | " + ' Power: ' + snapshot.child("power_level").val() + " | " + " Role: " + snapshot.child("user_type").val() + "</b></div>"
 	
-		//All PvP stats
-		+ "<div id = 'profile_pvp' align = 'left'>" + "PvP Stats: " + "<br><br>" + "KD: " + snapshot.child("overall_kd").val() + "<br>"
+		//All relevant PvP stats
+		+ "<table class = 'profile_pvp'>" + "<tr><td>" + "PvP Stats: " 
+		+ "<br><br>" 
+		+ "KD: " + snapshot.child("overall_kd").val() + "<br>"
 		+ "Kills: " + snapshot.child("pvp_kills").val() + "<br>"
 		+ "Matches: " + snapshot.child("matches").val() + "<br>"
 		+ "Most Kills In A Game: " + snapshot.child("most_kills_game").val() + "<br>"
-		+ "Longest Kill Streak: " + snapshot.child("longest_streak").val() + "<br></div>"
+		+ "Longest Kill Streak: " + snapshot.child("longest_streak").val() + 
+		+ "</tr></td></table><br>"
 		
-		//All PvE stats
-		+ "<div id = 'profile_pve' align = 'right'>" + "PvE Stats: " + "<br><br>" + "Raids Cleared: " + snapshot.child("raids_cleared").val() + "<br>"
-		+ "Fastest Time (In Minutes): " + snapshot.child("fastest_time").val() + "<br></div></div>"
+		//All relevant PvE stats
+		+ "<table class = 'profile_pve' <tr><td align = 'right'>" + "PvE Stats: " + "<br><br>" + "Raids Cleared: " + snapshot.child("raids_cleared").val() + "<br>"
+		+ "Fastest Time (In Minutes): " + snapshot.child("fastest_time").val() + "<br></table></div></div>"
 		};
-		/*
-		+ username + </div><br><div class="gamertag" align="center"> ' + snapshot.child("gamertag").val() + ' Platform: ' + platform + ' </div><div> User Type:' + snapshot.child("user_type").val()+ ' </div></div> <br> <div class = "PVE_stats" align="center"> PVE Stats <br> <div class="power" align="left"> Power Level: ' + snapshot.child("power_level").val() + '</div><div class="level" align="right"> Hieghest Character Level: ' + snapshot.child("highest_level").val() + '</div> <br><div class "raids" align="left"> Raids cleared: ' + snapshot.child("raids_cleared").val() + '<div class "time" align="right"> Fastest Time (in min) : ' + snapshot.child("fastest_time").val() + '</div> </div> <br> <br>'
-	+ '<div class = "PVP_stats" align="center"> PVP Stats <br> <div class "Matches" align="left"> Matches Played: ' + snapshot.child("matches").val() + '</div> <div class="kills" align="right"> PVP Kills: ' + snapshot.child("pvp_kills").val() + '</div> <br> <div class "deaths" align="left"> PVP Deaths: ' + snapshot.child("pvp_deaths").val() + '</div></div> <div class "time" align="right"></div> </div>' ;
-		};*/
 
 		profile_window.document.close();
 			/*}).catch(function(error)	//based on error catcher from signup.js
