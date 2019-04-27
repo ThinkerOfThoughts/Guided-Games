@@ -20,6 +20,7 @@ function make_appointment(event)
 	const hour = parseInt(form.hour.value);
 	const minute = parseInt(form.minute.value);
 	const other_user = form.other_user.value;
+	const reason = form.reason.value;
 	
 	if(year < 2019)
 		alert("Invalid Year!");
@@ -33,6 +34,8 @@ function make_appointment(event)
 		alert("Invalid Hour");
 	else if(minute < 0 || minute > 59)
 		alert("Invalid Minute");
+	else if(reason == "")
+		alert("Please provide an objective!");
 	else
 	{
 		firebase.auth().onAuthStateChanged(function(user) {
@@ -45,7 +48,7 @@ function make_appointment(event)
 					dataref.orderByChild('email').equalTo(user.email).on("child_added", function(snapshot){
 						let pending_requests = firebase.database().ref('pending_requests');
 						const newKey = pending_requests.push().key;
-						const cur_user = snapshot.child("usernam").val();
+						const cur_user = snapshot.child("username").val();
 						console.log(cur_user);
 						let newData = {
 							sending:cur_user,
@@ -55,6 +58,7 @@ function make_appointment(event)
 							day: day,
 							minute: minute,
 							hour: hour,
+							objective: reason,
 						}
 						
 						firebase.database().ref('pending_requests/' + newKey).update(newData, function(error){
