@@ -14,12 +14,12 @@ function make_appointment(event)
 	event.preventDefault();
 	
 	const form = event.target;
-	const year = parseInt(event.year.value);
-	const month = parseInt(event.month.value);
-	const day = parseInt(event.day.value);
-	const hour = parseInt(event.hour.value);
-	const minute = parseInt(event.minute.value);
-	const other_user = event.other_user.value;
+	const year = parseInt(form.year.value);
+	const month = parseInt(form.month.value);
+	const day = parseInt(form.day.value);
+	const hour = parseInt(form.hour.value);
+	const minute = parseInt(form.minute.value);
+	const other_user = form.other_user.value;
 	
 	if(year < 2019)
 		alert("Invalid Year!");
@@ -42,7 +42,7 @@ function make_appointment(event)
 				
 				//checks to see if username already exists
 				dataref.orderByChild('username').equalTo(other_user).once("value", function(snapshot){
-					dataref.orderBychild('email').equalTo(user.email).once("value", function(snapshot2){
+					dataref.orderByChild('email').equalTo(user.email).once("value", function(snapshot2){
 						let pending_requests = firebase.database().ref('pending_requests');
 						const newKey = pending_requests.push().key;
 						const cur_user = snapshot2.child("username").val();
