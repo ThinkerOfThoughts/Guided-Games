@@ -24,7 +24,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 			var temp_mail = user.email;
 			
 			//begins with pvp and pve info
-			owner.innerHTML = owner.innerHTML + '<form id=\"user_info\"><div id="user_profile" align="center">'
+			owner.innerHTML = owner.innerHTML + '<script src="appointment_handling.js"></script>'
+				+ '<form id=\"user_info\"><div id="user_profile" align="center">'
 				+ '<br><div class="profile_layout" align="center"><b>' 
 				+ temp_name + '<br>' + snapshot.child("gamertag").val() + '<br>'
 				+ 'Level: ' + snapshot.child("highest_level").val() + ' | Power: '
@@ -40,16 +41,18 @@ firebase.auth().onAuthStateChanged(function(user) {
 				+ 'PvE Stats:<br><br>'
 				+ 'Raids Cleared: ' + snapshot.child("raids_cleared").val()
 				+ '<br>Fastest Time(In Minutes): ' + snapshot.child("fastest_time").val()
-				+ '<br></td></tr></tbody></table></td></tr></tbody></table>';
+				+ '<br></td></tr></tbody></table></td></tr></tbody></table></div></div></form>';
 				
 			//section that adds pending requests
 			var counter = 0;
-			firebase.database.ref('pending_requests/').orderByChild("receiving").equalTo(temp_name).on("child_added", function(snapshot){
+			owner.innerHTML += '<br><br><div class="forum_layout"><table id="pend_request"></table></div><br><br>';
+			var pending_table = document.getElementById("pend_request");
+			
+			firebase.database().ref('pending_requests/').orderByChild("receiving").equalTo(temp_name).on("child_added", function(snapshot){
+				//pending_table.innerHTML = pending_table.innerHTML;
 			});
 				
 			//end of page.
-			owner.innerHTML = owner.innherHTML + '<input align="center" type=\"submit\" name=\"submit-btn\" value=\"Logout\" class=\"button\"></div></div>'
-				+ '</form>';
 			function logout(event)
 			{
 				firebase.auth().signOut().then(function() {
@@ -58,7 +61,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 				  // An error happened.
 				});
 			}
-			document.querySelector('#user_info').addEventListener('submit', logout);
+			owner.innerHTML = owner.innerHTML + '<div align="center"><input type=\"submit\" name=\"submit-btn\" value=\"Logout\" class=\"button\" onclick="logout()"></div>';
+			
 		});
 	}
 	else

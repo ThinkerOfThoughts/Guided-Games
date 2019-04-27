@@ -84,6 +84,8 @@ function sign_up(event)
 				var power_level;
 				var raids_cleared;
 				var fastest_time;
+				const base_rating = 3;
+				const num_reviews = 0;
 				
 				//request player info from api
 				axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config_d2).then(function(response){
@@ -159,7 +161,9 @@ function sign_up(event)
 								highest_level: highest_level,
 								power_level: power_level,
 								raids_cleared: raids_cleared,
-								fastest_time: fastest_time
+								fastest_time: fastest_time,
+								rating: base_rating,
+								num_ratings: num_reviews,
 							};
 							
 							firebase.database().ref('users/' + newKey).update(newData, function(error){
