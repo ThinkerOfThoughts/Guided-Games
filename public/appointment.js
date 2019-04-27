@@ -41,11 +41,12 @@ function make_appointment(event)
 				var dataref = firebase.database().ref("users/");
 				
 				//checks to see if username already exists
-				dataref.orderByChild('username').equalTo(other_user).once("value", function(snapshot){
-					dataref.orderByChild('email').equalTo(user.email).once("value", function(snapshot2){
+				dataref.orderByChild('username').equalTo(other_user).on("child_added", function(snapshot){
+					dataref.orderByChild('email').equalTo(user.email).on("child_added", function(snapshot){
 						let pending_requests = firebase.database().ref('pending_requests');
 						const newKey = pending_requests.push().key;
-						const cur_user = snapshot2.child("username").val();
+						const cur_user = snapshot.child("usernam").val();
+						console.log(cur_user);
 						let newData = {
 							sending:cur_user,
 							receiving: other_user,
@@ -55,6 +56,16 @@ function make_appointment(event)
 							minute: minute,
 							hour: hour,
 						}
+						
+						firebase.database().ref('pending_requests/' + newKey).update(newData, function(error){
+							if(error){
+								alert(error);
+							}
+							else
+							{
+								alert('Request has been sent!');
+							}
+						});
 					});
 				});
 			}
