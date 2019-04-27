@@ -30,12 +30,14 @@ function post_request(event)
 				let forum = firebase.database().ref('forum');
 				const newKey = forum.push().key;
 				const usernm = snapshot.child("username").val();
+				const user_type = snapshot.child("user_type").val();
 				
 				let newData = {
 					username: usernm,
 					post: purpose,
 					account: acct,
 					theStrat: strat,
+					user_type: user_type,
 				};
 				
 				firebase.database().ref('forum/' + newKey).update(newData, function(error){
