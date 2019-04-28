@@ -43,6 +43,20 @@ body {
 	align: center;
 }
 
+.request_layout{
+	background-color:#87DCFF;
+	text-align:center; 
+	vertical-align: middle; 
+	width:450px; 
+	height: 100px;
+	margin:0 auto;
+	margin-left: 20px
+	align: left;
+	border: 1px solid black;
+	border-radius: 15px;
+	align: center;
+}
+
 .top_table{
 	position:relative;
 	padding: 10px 20px; 

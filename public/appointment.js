@@ -48,7 +48,7 @@ function make_appointment(event)
 				var dataref = firebase.database().ref("users/");
 				
 				//checks to see if username already exists and that the user is valid
-				dataref.orderByChild('username').equalTo(other_user).on("child_added", function(snapshot){
+				dataref.orderByChild('username').equalTo(other_user).once("value", function(snapshot){
 					if(snapshot.exists())
 						{
 						dataref.orderByChild('email').equalTo(user.email).on("child_added", function(snapshot){
@@ -67,14 +67,23 @@ function make_appointment(event)
 								objective: reason,
 							}
 							
-							//submits request to database
-							firebase.database().ref('pending_requests/' + newKey).update(newData, function(error){
-								if(error){
-									alert(error);
+							pending_requests.orderByChild("objective").equalTo(reason).once("child_added", function(snapshot){
+								if(snapshot.exists())
+								{
+									alert("An invite for that objective already exists!");
 								}
 								else
 								{
-									alert('Request has been sent!');
+									//submits request to database
+									firebase.database().ref('pending_requests/' + newKey).update(newData, function(error){
+										if(error){
+											alert(error);
+										}
+										else
+										{
+											alert('Request has been sent!');
+										}
+									});
 								}
 							});
 						});

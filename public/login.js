@@ -41,18 +41,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 				+ 'PvE Stats:<br><br>'
 				+ 'Raids Cleared: ' + snapshot.child("raids_cleared").val()
 				+ '<br>Fastest Time(In Minutes): ' + snapshot.child("fastest_time").val()
+				+ '<br><a href=\"./communication.html\">Send a request</a>'
 				+ '<br></td></tr></tbody></table></td></tr></tbody></table></div></div></form>';
 				
-			//section that adds pending requests
-			var counter = 0;
-			owner.innerHTML += '<br><br><div class="forum_layout"><table id="pend_request"></table></div><br><br>';
-			var pending_table = document.getElementById("pend_request");
-			
-			firebase.database().ref('pending_requests/').orderByChild("receiving").equalTo(temp_name).on("child_added", function(snapshot){
-				//pending_table.innerHTML = pending_table.innerHTML;
-			});
-				
-			//end of page.
+			//logout button
 			function logout(event)
 			{
 				firebase.auth().signOut().then(function() {
@@ -62,6 +54,22 @@ firebase.auth().onAuthStateChanged(function(user) {
 				});
 			}
 			owner.innerHTML = owner.innerHTML + '<div align="center"><input type=\"submit\" name=\"submit-btn\" value=\"Logout\" class=\"button\" onclick="logout()"></div>';
+				
+			//section that adds pending requests
+			var counter = 0;
+			firebase.database().ref('pending_requests/').orderByChild("receiving").equalTo(temp_name).on("child_added", function(snapshot){
+				owner.innerHTML = owner.innerHTML + '<br><br><div class="request_layout"><table id="pend_request' + counter + '">'
+					+ '<tr>Pending: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
+					+ snapshot.child("day").val() + ', ' + snapshot.child("hour").val() + ':'
+					+ snapshot.child("minute").val() + '</tr>'
+					+ '<tr><td width="75px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("sending").val() 
+					+ '</td><td width="75px"><button type="button">Accept</button></td>'
+					+ '<td width="75px"><button type="button">Refuse</button></td></tr></table></div>'
+					+ '';
+				counter = counter + 1;
+				//console.log(pending_table.innerHTML);
+			});
+			
 			
 		});
 	}
