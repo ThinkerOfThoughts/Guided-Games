@@ -78,11 +78,11 @@ firebase.auth().onAuthStateChanged(function(user) {
 			var r_counter = 0;
 			firebase.database().ref('accepted_requests').orderByChild("receiving").equalTo(temp_name).on("child_added", function(snapshot){
 				owner.innerHTML = owner.innerHTML + '<br><br><div class="request_layout"><table id="receiv_request' + r_counter + '">'
-					+ '<tr>Accepted: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
+					+ '<tr>Received: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
 					+ snapshot.child("day").val() + ', ' + snapshot.child("hour").val() + ':'
 					+ snapshot.child("minute").val() + '</tr>'
 					+ '<tr><td width="75px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("sending").val() 
-					+ '</td><td><button type="button" onclick="accepted_rating(' + r_counter + ')">Rate Player</button></td></tr></table></div>'
+					+ '</td><td><button type="button" onclick="sender_rating(' + r_counter + ')">Rate Player</button></td></tr></table></div>'
 					+ '';
 				r_counter = r_counter + 1;
 			});
@@ -91,12 +91,13 @@ firebase.auth().onAuthStateChanged(function(user) {
 			var s_counter = 0;
 			firebase.database().ref('accepted_requests').orderByChild("sending").equalTo(temp_name).on("child_added", function(snapshot){
 				owner.innerHTML = owner.innerHTML + '<br><br><div class="request_layout"><table id="sent_request' + s_counter + '">'
-					+ '<tr>Accepted: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
+					+ '<tr>Sent: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
 					+ snapshot.child("day").val() + ', ' + snapshot.child("hour").val() + ':'
 					+ snapshot.child("minute").val() + '</tr>'
 					+ '<tr><td width="75px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("receiving").val() 
-					+ '</td><td><button type="button" onclick="received_rating(' + r_counter + ')">Rate Player</button></td></tr></table></div>'
-					+ '';
+					+ '</td></tr></table></div>';
+				//	+ '<td><button type="button" onclick="receiver_rating(' + s_counter + ')">Rate Player</button></td>'
+				//	+ '';
 				s_counter = s_counter + 1;
 			});
 			
