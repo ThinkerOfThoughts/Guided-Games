@@ -139,6 +139,10 @@ function accept_forum(forum_counter)
 			var minute = parseInt(prompt("Please input a minute of the hour"));
 			while(minute < 0 || minute > 59)
 				minute = parseInt(prompt("Please input a valid minute of the hours"));
+			
+			
+			if(minute < 10)
+				minute = "0" + minute;
 		
 		
 			//pulls current users username

@@ -66,7 +66,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 					+ '<tr>Pending: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
 					+ snapshot.child("day").val() + ', ' + snapshot.child("hour").val() + ':'
 					+ snapshot.child("minute").val() + '</tr>'
-					+ '<tr><td width="75px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("sending").val() 
+					+ '<tr><td width="150px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("sending").val() 
 					+ '</td><td width="75px"><button type="button" onclick="accept_request(' + counter + ')">Accept</button></td>'
 					+ '<td width="75px"><button type="button" onclick="refuse_request(' + counter + ')">Refuse</button></td></tr></table></div>'
 					+ '';
@@ -81,7 +81,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 					+ '<tr>Received: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
 					+ snapshot.child("day").val() + ', ' + snapshot.child("hour").val() + ':'
 					+ snapshot.child("minute").val() + '</tr>'
-					+ '<tr><td width="75px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("sending").val() 
+					+ '<tr><td width="150px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("sending").val() 
 					+ '</td><td><button type="button" onclick="sender_rating(' + r_counter + ')">Rate Player</button></td></tr></table></div>'
 					+ '';
 				r_counter = r_counter + 1;
@@ -94,7 +94,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 					+ '<tr>Sent: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
 					+ snapshot.child("day").val() + ', ' + snapshot.child("hour").val() + ':'
 					+ snapshot.child("minute").val() + '</tr>'
-					+ '<tr><td width="75px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("receiving").val() 
+					+ '<tr><td width="150px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("receiving").val() 
 					+ '</td></tr></table></div>';
 				//	+ '<td><button type="button" onclick="receiver_rating(' + s_counter + ')">Rate Player</button></td>'
 				//	+ '';
