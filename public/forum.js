@@ -71,19 +71,16 @@ var dataref = firebase.database().ref("forum/");
 document.getElementById("plat").onchange = function(){
 	//The platform is Xbox
 	if(this.value === "X"){
-		alert("Xbox");
 		var type = 1;
 	}
 	//Playstation
 	else if(this.value === "P")
     {
-        alert("PSN");
 		var type = 2;
     }
 	//PC
     else if(this.value === "B")
     {
-        alert("BNET");
 		var type = 4;
     }
 
@@ -98,6 +95,7 @@ document.getElementById("plat").onchange = function(){
 		}
 	}*/
 		//Function for getting and printing API data to the forum
+		var forum_counter = 0;
 		dataref.orderByChild('username').startAt("").endAt("\uf8ff").on("child_added", function(snapshot){
 		//NOTE -> I've copied a lot of the comments from testAPI to clarify things, but you can check there for more details
 		
@@ -149,11 +147,11 @@ document.getElementById("plat").onchange = function(){
 					
 					+ "<td align = right>" + "<b>" + "PvE: " + raids + " Raids " + " | " + raidTime + " Fastest Time " + "</tr></td></b>"
 					+ "</table><br>"
-					
-					+ "<table class = 'mid_table'>"
-					+ "<tr><td>" + snapshot.child("post").val() + "<br>"
-					+ " - " + snapshot.child('username').val()
-					+ "</tr></td></table>"
+                    
+					+ "<table class = 'mid_table' id='forum_post" + forum_counter + "'>"
+					+ "<tr><td>" + snapshot.child("post").val() + "</td><tr><td>"
+					+ snapshot.child('username').val()
+					+ '</td><td><button type="button" onclick="accept_forum(' + forum_counter + ')>Accept post</button><td></tr></table>'
 					+ '</div> <br><br>';
 				}
 				//Display for if there's a link given
@@ -168,13 +166,14 @@ document.getElementById("plat").onchange = function(){
 					+ "<td align = right>" + "<b>" + "PvE: " + raids + " Raids " + " | " + raidTime + " Fastest Time " + "</tr></td></b>"
 					+ "</table><br>"
                     
-					+ "<table class = 'mid_table'>"
-					+ "<tr><td>" + snapshot.child("post").val() + "<br>"
-					+ " - " + snapshot.child('username').val()
-					+ "</tr></td></table>"
+					+ "<table class = 'mid_table' id='forum_post" + forum_counter + "'>"
+					+ "<tr><td>" + snapshot.child("post").val() + "</td><tr><td>"
+					+ snapshot.child('username').val()
+					+ '</td><td><button type="button" onclick="accept_forum(' + forum_counter + ')">Accept post</button><td></tr></table>'
 					
 					+ '</div> <br><br>';
 				}
+				forum_counter = forum_counter + 1;
 			});
 		}); 
 	});
