@@ -9,6 +9,16 @@ var config = {
   };
 firebase.initializeApp(config);
 
+
+function logout(event)
+{
+	firebase.auth().signOut().then(function() {
+		window.location.href = './index.html';
+	}).catch(function(error) {
+	  // An error happened.
+	});
+}
+
 firebase.auth().onAuthStateChanged(function(user) {
 	if(user)
 	{
@@ -24,7 +34,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 			var temp_mail = user.email;
 			
 			//begins with pvp and pve info
-			owner.innerHTML = owner.innerHTML + '<script src="appointment_handling.js"></script>'
+			owner.innerHTML = owner.innerHTML
 				+ '<form id=\"user_info\"><div id="user_profile" align="center">'
 				+ '<br><div class="profile_layout" align="center"><b>' 
 				+ temp_name + '<br>' + snapshot.child("gamertag").val() + '<br>'
@@ -41,18 +51,12 @@ firebase.auth().onAuthStateChanged(function(user) {
 				+ 'PvE Stats:<br><br>'
 				+ 'Raids Cleared: ' + snapshot.child("raids_cleared").val()
 				+ '<br>Fastest Time(In Minutes): ' + snapshot.child("fastest_time").val()
+				+ '<br> Misc: '
+				+ '<br>Rating: ' + snapshot.child("rating").val()
 				+ '<br><a href=\"./communication.html\">Send a request</a>'
 				+ '<br></td></tr></tbody></table></td></tr></tbody></table></div></div></form>';
 				
 			//logout button
-			function logout(event)
-			{
-				firebase.auth().signOut().then(function() {
-				  // Sign-out successful.
-				}).catch(function(error) {
-				  // An error happened.
-				});
-			}
 			owner.innerHTML = owner.innerHTML + '<div align="center"><input type=\"submit\" name=\"submit-btn\" value=\"Logout\" class=\"button\" onclick="logout()"></div>';
 				
 			//section that adds pending requests
@@ -63,12 +67,40 @@ firebase.auth().onAuthStateChanged(function(user) {
 					+ snapshot.child("day").val() + ', ' + snapshot.child("hour").val() + ':'
 					+ snapshot.child("minute").val() + '</tr>'
 					+ '<tr><td width="75px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("sending").val() 
-					+ '</td><td width="75px"><button type="button">Accept</button></td>'
-					+ '<td width="75px"><button type="button">Refuse</button></td></tr></table></div>'
+					+ '</td><td width="75px"><button type="button" onclick="accept_request(' + counter + ')">Accept</button></td>'
+					+ '<td width="75px"><button type="button" onclick="refuse_request(' + counter + ')">Refuse</button></td></tr></table></div>'
 					+ '';
 				counter = counter + 1;
 				//console.log(pending_table.innerHTML);
 			});
+			
+			//checks for requests that a user has accepted
+			var r_counter = 0;
+			firebase.database().ref('accepted_requests').orderByChild("receiving").equalTo(temp_name).on("child_added", function(snapshot){
+				owner.innerHTML = owner.innerHTML + '<br><br><div class="request_layout"><table id="receiv_request' + r_counter + '">'
+					+ '<tr>Accepted: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
+					+ snapshot.child("day").val() + ', ' + snapshot.child("hour").val() + ':'
+					+ snapshot.child("minute").val() + '</tr>'
+					+ '<tr><td width="75px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("sending").val() 
+					+ '</td><td><button type="button" onclick="accepted_rating(' + r_counter + ')">Rate Player</button></td></tr></table></div>'
+					+ '';
+				r_counter = r_counter + 1;
+			});
+			
+			//checks for requests that the users has sent
+			var s_counter = 0;
+			firebase.database().ref('accepted_requests').orderByChild("sending").equalTo(temp_name).on("child_added", function(snapshot){
+				owner.innerHTML = owner.innerHTML + '<br><br><div class="request_layout"><table id="sent_request' + s_counter + '">'
+					+ '<tr>Accepted: </tr><tr>At: ' + snapshot.child("year").val() + '-' + snapshot.child("month").val() + '-'
+					+ snapshot.child("day").val() + ', ' + snapshot.child("hour").val() + ':'
+					+ snapshot.child("minute").val() + '</tr>'
+					+ '<tr><td width="75px">' + snapshot.child("objective").val() + '</td><td width="75px">' + snapshot.child("receiving").val() 
+					+ '</td><td><button type="button" onclick="received_rating(' + r_counter + ')">Rate Player</button></td></tr></table></div>'
+					+ '';
+				s_counter = s_counter + 1;
+			});
+			
+			
 			
 			
 		});

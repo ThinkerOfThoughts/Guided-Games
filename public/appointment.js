@@ -19,7 +19,7 @@ function make_appointment(event)
 	const month = parseInt(form.month.value);
 	const day = parseInt(form.day.value);
 	const hour = parseInt(form.hour.value);
-	const minute = parseInt(form.minute.value);
+	var minute = parseInt(form.minute.value);
 	const other_user = form.other_user.value;
 	const reason = form.reason.value;
 	
@@ -47,6 +47,11 @@ function make_appointment(event)
 			{
 				var dataref = firebase.database().ref("users/");
 				
+				
+				//checks for minutes being less then 10
+				if(minute < 10)
+					minute = "0" + minute;
+				
 				//checks to see if username already exists and that the user is valid
 				dataref.orderByChild('username').equalTo(other_user).once("value", function(snapshot){
 					if(snapshot.exists())
@@ -67,7 +72,7 @@ function make_appointment(event)
 								objective: reason,
 							}
 							
-							pending_requests.orderByChild("objective").equalTo(reason).once("child_added", function(snapshot){
+							pending_requests.orderByChild("objective").equalTo(reason).once("value", function(snapshot){
 								if(snapshot.exists())
 								{
 									alert("An invite for that objective already exists!");
@@ -82,6 +87,7 @@ function make_appointment(event)
 										else
 										{
 											alert('Request has been sent!');
+											window.location.href = ("index.html");
 										}
 									});
 								}
