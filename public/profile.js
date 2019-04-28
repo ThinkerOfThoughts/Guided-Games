@@ -125,7 +125,7 @@ axios.get(base_url + 'SearchDestinyPlayer/-1/' + gamertag, config)
 		
 		//All relevant PvE stats
 		+ "<table class = 'profile_pve' <tr><td align = 'right'>" + "PvE Stats: " + "<br><br>" + "Raids Cleared: " + snapshot.child("raids_cleared").val() + "<br>"
-		+ "Fastest Time (In Minutes): " + snapshot.child("fastest_time").val() + "<br></table></div></div>"
+		+ "Fastest Time (In Minutes): " + snapshot.child("fastest_time").val() + "<br>Rating: " + snapshot.child("rating").val() + "</table></div></div>"
 		};
 
 		document.close();
